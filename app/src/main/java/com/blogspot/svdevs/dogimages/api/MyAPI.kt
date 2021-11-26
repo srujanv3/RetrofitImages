@@ -2,10 +2,7 @@ package com.blogspot.svdevs.dogimages.api
 
 import retrofit2.http.GET
 
-const val BASE_URL = "https://random.dog"
-
-interface ApiRequest {
-
+interface MyAPI {
     @GET("/woof.json?ref=apilist.fun")
-    suspend fun getRandomDog(): Dog
+    suspend fun getRandomDoggo(): Dog
 }

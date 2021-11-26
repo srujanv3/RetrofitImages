@@ -6,8 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatDelegate
-import com.blogspot.svdevs.dogimages.api.ApiRequest
-import com.blogspot.svdevs.dogimages.api.BASE_URL
+import com.blogspot.svdevs.dogimages.api.MyAPI
 import com.blogspot.svdevs.dogimages.databinding.ActivityMainBinding
 import com.bumptech.glide.Glide
 import kotlinx.coroutines.Dispatchers
@@ -16,6 +15,8 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+
+const val BASE_URL = "https://random.dog"
 
 class MainActivity : AppCompatActivity() {
 
@@ -63,11 +64,12 @@ class MainActivity : AppCompatActivity() {
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-            .create(ApiRequest::class.java)
+            .create(MyAPI::class.java)
 
         GlobalScope.launch(Dispatchers.IO) {
+//            val response = api.getRandomDoggo()
             try {
-                val response = api.getRandomDog()
+                val response = api.getRandomDoggo()
                 Log.d("Main", "Size: ${response.fileSizeBytes}")
 
                 //If the image is less than about 0.4mb, then we try to load it into our app, else we try again.
